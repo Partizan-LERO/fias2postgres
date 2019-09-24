@@ -6,28 +6,28 @@ echo '++++++++++++++++++ SOCRBASE TABLE CREATED'
 echo
 pgdbf $PATH_TO_DBF_FILES/SOCRBASE.DBF | iconv -f cp866 -t utf-8 | psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
 
-echo '++++++++++++++++++ CHECKING ADDROBJ FILES'
-if [ -f $PATH_TO_DBF_FILES/ADDROB01.DBF ]; then
-   mv .$PATH_TO_DBF_FILES/ADDROB01.DBF $PATH_TO_DBF_FILES/ADDROBJ.DBF
-   echo '++++++++++++++++++ ADDROBJ INITIAL FILE MOVED'
+echo '++++++++++++++++++ CHECKING HOUSE FILES'
+if [ -f $PATH_TO_DBF_FILES/HOUSE01.DBF ]; then
+   mv .$PATH_TO_DBF_FILES/HOUSE01.DBF $PATH_TO_DBF_FILES/HOUSE.DBF
+   echo '++++++++++++++++++ HOUSE INITIAL FILE MOVED'
 fi
-pgdbf $PATH_TO_DBF_FILES/ADDROBJ.DBF | iconv -f cp866 -t utf-8 | psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
-echo '++++++++++++++++++ INITIAL ADDROBJ TABLE CREATED'
+pgdbf $PATH_TO_DBF_FILES/HOUSE.DBF | iconv -f cp866 -t utf-8 | psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
+echo '++++++++++++++++++ INITIAL HOUSE TABLE CREATED'
 
 
-for FULLPATH in `find $PATH_TO_DBF_FILES/ADDROB* -type f`
+for FULLPATH in `find $PATH_TO_DBF_FILES/HOUSE* -type f`
 do
     FILE="${FULLPATH##*/}"
     TABLE="${FILE%.*}"
 
-    if [ $TABLE = 'ADDROBJ' ]; then
-      echo 'SKIPPING ADDROBJ'
+    if [ $TABLE = 'HOUSE' ]; then
+      echo 'SKIPPING HOUSE'
     else
       pgdbf $FULLPATH | iconv -f cp866 -t utf-8 | psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB
       echo "++++++++++++++++++ TABLE $TABLE CREATED"
 
-      echo "++++++++++++++++++ INSERT $TABLE DATA INTO ADDROBJ"
-      psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB -c "INSERT INTO addrobj SELECT * FROM $TABLE; DROP TABLE $TABLE;"
+      echo "++++++++++++++++++ INSERT $TABLE DATA INTO HOUSE"
+      psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB -c "INSERT INTO house SELECT * FROM $TABLE; DROP TABLE $TABLE;"
     fi
 
 done
