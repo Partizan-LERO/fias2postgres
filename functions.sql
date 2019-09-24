@@ -437,7 +437,7 @@ BEGIN
                                       c_WildChar);
     v_FormalNameTemplate:=COALESCE(v_FormalNameTemplate,c_WildChar);
     RETURN QUERY
-      SELECT cfa.aoguid,cfa.AOLevel,fsfn_AddressObjects_TreeActualName(cfa.aoguid),
+      SELECT cfa.aoguid,cfa.aolevel,fsfn_AddressObjects_TreeActualName(cfa.aoguid),
              cfa.shortname,cfa.formalname,cfa.currstatus,
              pfa.shortname,pfa.formalname,
              NULL::VARCHAR,NULL::VARCHAR
