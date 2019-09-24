@@ -8,6 +8,6 @@ echo '_______________________НАЧИНАЮ ОБНОВЛЕНИЕ СХЕМЫ_____
 psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB -f update_schema.sql
 
 echo '_______________________НАЧИНАЮ СОЗДАНИЕ ИНДЕКСОВ_________________'
-psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB -f indexes.sql
+psql postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DB -f address_indexes.sql
 
 echo '_______________________ _________ГОТОВО________ _________________'
