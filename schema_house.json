@@ -1,0 +1,15 @@
+{
+    "process_tables": ["house"],
+    "schema": {
+        "house": {
+            "null": [
+            ],
+            "convert": {
+                "houseguid": "uuid",
+                "aoguid": "uuid",
+                "houseid": "uuid"
+            }
+        }
+    }
+}
+
